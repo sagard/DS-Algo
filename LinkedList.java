@@ -94,6 +94,28 @@ class LinkedList{
 	      curr.next = null;
 		
 	}
+	
+     public boolean hasCycle(ListNode head) {
+        if(head == null) return false;
+        ListNode slow = head;
+        ListNode fast = head;
+       
+        if(slow.next == slow ) return true;
+        if(slow.next == null || slow.next.next == null) return false;
+        
+        boolean hasCycle = false;
+
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow==fast){
+                hasCycle = true;
+                return hasCycle;
+            }
+            
+        }
+        return hasCycle;
+    }
 
 
 
