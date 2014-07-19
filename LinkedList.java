@@ -94,14 +94,20 @@ class LinkedList{
 	      curr.next = null;
 		
 	}
+
 	
-     public boolean hasCycle(ListNode head) {
+     public boolean hasCycle(LinkedList head) {
         if(head == null) return false;
-        ListNode slow = head;
-        ListNode fast = head;
+        LinkedList slow = head;
+        LinkedList fast = head;
        
+        //if one noce pointing to itself
         if(slow.next == slow ) return true;
+        //if only one or two nodes and no loop
         if(slow.next == null || slow.next.next == null) return false;
+        //2 nodes and 2nd pointing to first
+        if((slow.next == slow) || (slow.next.next==slow)) return true;
+
         
         boolean hasCycle = false;
 
@@ -115,6 +121,41 @@ class LinkedList{
             
         }
         return hasCycle;
+    }
+    
+     LinkedList slow;
+     LinkedList fast;
+     //Detect loop node
+    public LinkedList detectCycle(LinkedList head) {
+        if(head == null) return null;
+        int count = 1;
+        boolean cyle = hasCycle(head);
+        if(cyle == false) return null;
+        else{
+            if((slow.next == slow) || (slow.next.next==slow)) return slow;
+
+            fast = fast.next;
+            //move the fast pointer till it meets slow pointer
+            while(slow != fast){
+                count++;
+                fast = fast.next;
+            }
+            
+            slow = head;
+            fast = head;
+            //move fast count number of nodes ahead and increment , they meet at node start
+            while(count>0){
+                fast = fast.next;
+                count--;
+            }
+            
+            while(slow!=fast){
+                slow=slow.next;
+                fast=fast.next;
+            }
+            return slow;
+            
+        }
     }
 
 
