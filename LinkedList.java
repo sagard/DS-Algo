@@ -159,7 +159,38 @@ class LinkedList{
     }
 
 
+    // swap 2 pairs 
+    public LinkedList swapPairs(ListNode head) {
+        if(head == null) return head;
+        
+        // 1 node
+        if(head.next == null) return head;
+        LinkedList curr=head;
+        LinkedList prev = null;
+        LnkedList temp;
 
+        // make head as 2nd node
+        head = curr.next;                  
+        while(curr!=null && curr.next!=null){   
+            // temp will be 2nd node nd so on..
+            temp = curr.next;     
+            
+            //swap the nodes
+            curr.next = temp.next;   //1 to point to 3rd
+            temp.next = curr;        // 2nd to 1st
+            
+            if(prev!=null){
+                prev.next = temp;    //prev node swaped to point to current node swaped
+            }
+            
+            prev= curr;              //prev node to curr node ie 1st(as it is 2nd now),3rd etc
+            curr=curr.next;          // curr to 3rd,5th etc
+
+        }
+        
+        return head;
+        
+    }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LinkedList l = new LinkedList();
