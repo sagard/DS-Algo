@@ -191,6 +191,98 @@ class LinkedList{
         return head;
         
     }
+    
+//Insert in sorted linked list..head is assumed static for below 4 func(insertSorted,finddups,findklast,findMiddle)
+//need to pass head to run this..
+//Func to insert in sorted linked list
+public void insertSorted(int num)
+{
+  LinkedList node;
+  node = new LinkedList();
+  node.data = num;
+  // first node.
+  if(head.data>num)
+  {
+    node.next = head;
+	head = node;
+	System.out.println("head data:" + head.data);
+	return;
+  }
+  
+  LinkedList curr=head.next;
+  LinkedList prev=head;
+  
+  while(curr.next!=null && curr.data<num)
+  { 
+    prev=curr;
+    curr=curr.next;
+  }
+  if(curr.next!=null)
+  {
+	  node.next = prev.next;
+	  prev.next=node;
+	  return;
+  }
+  else{
+  //last node
+	  curr.next=node;
+	  node.next=null;
+  }
+  return;
+}
+
+//find duplicates in linkedlist
+public ArrayList<Integer> findDups(){
+	ArrayList<Integer> dups = new ArrayList<Integer>();
+	HashMap<Integer,Integer> hm = new HashMap<Integer,Integer>();
+	
+	LinkedList curr=head;
+	while(curr!=null){
+		
+	 if(hm.containsKey(curr.data)){
+		 System.out.println(hm.get(curr.data));
+		 dups.add(curr.data);
+	 }
+	 else{
+		 hm.put(curr.data, curr.data);
+	 }
+	 curr=curr.next;
+	}
+  return dups;
+}
+
+//find middle element in linked list
+public LinkedList findMidde(){
+	if(head.next == null) return null;
+	LinkedList curr=head;
+	LinkedList curr1 = head;
+	
+	while(curr1!=null && curr1.next!=null){
+		curr = curr.next;
+		curr1 = curr1.next.next;
+	}
+	System.out.println("Middle node:" + curr.data);
+	return curr;
+}
+
+//find kth last element in linked list
+public LinkedList findkLast(int k){
+	if(head.next == null) return null;
+	LinkedList curr=head;
+	LinkedList curr1 = head;
+	
+	//assume k is less than list..if dnt wanna assume add a condition for null checking
+	for(int i = 0;i<k;i++){
+		curr1=curr1.next;
+	}
+	
+	while(curr1.next!=null){
+		curr = curr.next;
+		curr1 = curr1.next;
+	}
+	System.out.println("k last node:" + curr.data);
+	return curr;
+}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LinkedList l = new LinkedList();
