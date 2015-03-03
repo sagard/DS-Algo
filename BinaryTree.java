@@ -68,12 +68,12 @@ public class BinaryTree {
 	{
 		if(node !=null)
 		{
-			print(node.left);
+			isBSTR(node.left);
 			int value = node.data;
 			if(node.data<prev) return false;
 			prev = node.data;
 			System.out.println("tree data is :" + node.data);
-			print(node.right);
+			isBSTR(node.right);
 		}
 		return true;
 	}
@@ -168,8 +168,9 @@ public class BinaryTree {
 
 /////////////////////////////////////////////////////////////
 	//lca for bst
+	
+	// if current node data is less than data1 and data 2 lca is in right side
 	// if current node data is greater than both 1 and 2;lca is in left side
-	// if current node data is greater than lca is in right side
 	// if one is greater or less we have the lca..
 	Tree getLCA(Tree root, int data1, int data2)
 	{
